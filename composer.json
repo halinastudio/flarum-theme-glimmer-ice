@@ -1,0 +1,30 @@
+{
+    "name": "halinastudio/glimmer-ice",
+    "description": "Glimmer Ice Theme for Flarum: A sleek, modular Less theme with animations, dark mode, and responsive layout.",
+    "type": "flarum-extension",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "halina",
+            "email": "luyzm1@outlook.com"
+        }
+    ],
+    "require": {
+        "flarum/core": "^1.8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "HalinaStudio\\GlimmerIce\\": "src/"
+        }
+    },
+    "extra": {
+        "flarum-extension": {
+            "title": "Glimmer Ice UI",
+            "icon": {
+                "name": "fas fa-snowflake",
+                "backgroundColor": "#007AFF",
+                "color": "#fff"
+            }
+        }
+    }
+}

@@ -1,0 +1,150 @@
+// Variables
+@radius-base: 12px;
+@radius-sm: @radius-base * 0.666;
+@line-color: rgba(224, 224, 224, 0.8);
+@card-bg: #ffffff;
+@background-dark: rgba(14, 14, 14, 0.8);
+@shadow-intensity: 0.15;
+@loading-color: #007AFF;
+@blur-intensity: 8px;
+
+@breakpoint-md: 768px;
+@breakpoint-lg: 992px;
+
+// Dark mode mixin
+.dark-mode() {
+  background-color: darken(@background-dark, 5%);
+}
+
+// Global styles
+body, #app .App-content {
+  background-color: var(--control-bg-light);
+
+  & when (@config-dark-mode = true) {
+    .dark-mode();
+  }
+}
+
+// WelcomeHero component
+.WelcomeHero {
+  color: #fdfdfd;
+  background: linear-gradient(160deg, var(--control-bg-shaded), var(--button-primary-bg-hover));
+  border-radius: @radius-base;
+  margin: 12px 15px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, @shadow-intensity);
+  position: relative;
+
+  & when (@config-dark-mode = true) {
+    .dark-mode() {
+      background: linear-gradient(160deg, lighten(@background-dark, 10%), @background-dark);
+    }
+    .dark-mode();
+  }
+
+  &::after {
+    content: "UI by TionDo UI";
+    display: block;
+    position: absolute;
+    bottom: 12px;
+    left: 0;
+    width: 100%;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.4);
+    opacity: 0.8;
+    transition: opacity 0.3s;
+    pointer-events: none;
+
+    & when (@config-dark-mode = true) {
+      .dark-mode() {
+        color: rgba(0, 0, 0, 0.4);
+      }
+      .dark-mode();
+    }
+
+    @media (max-width: 767px) {
+      font-size: 0.675rem;
+      bottom: 8px;
+    }
+  }
+
+  &:hover::after {
+    opacity: 0.9;
+  }
+
+  .Hero-close {
+    display: none;
+  }
+}
+
+// Card base styles mixin
+.card-base() {
+  background-color: @card-bg;
+  border-radius: @radius-base;
+  margin: 8px 0;
+  padding: 12px 22px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, @shadow-intensity);
+  transition: transform 0.2s ease;
+
+  &:hover {
+    @hover-translate-y: -2px;
+    transform: translateY(@hover-translate-y);
+  }
+}
+
+// PostStream, DiscussionListItem, and PostsUserPage components
+.PostStream, .DiscussionListItem, .PostsUserPage {
+  .card-base();
+
+  & when (@config-dark-mode = true) {
+    background-color: @background-dark;
+  }
+}
+
+// Keyframes for spin animation
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// Button loading state
+.Button {
+  &.loading {
+    &:after {
+      content: "";
+      display: inline-block;
+      width: 1em;
+      height: 1em;
+      border: 2px solid @loading-color;
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+  }
+}
+
+// Header styles
+#header {
+  @media (min-width: 768px) {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(@blur-intensity);
+
+    & when (@config-dark-mode = true) {
+      .dark-mode() {
+        background: rgba(0, 0, 0, 0.6);
+      }
+      .dark-mode();
+    }
+  }
+}
+
+// Mobile-specific styles
+@media (max-width: 767px) {
+  .DiscussionPage-nav > ul {
+    li {
+      margin: 0.3125rem;
+    }
+  }
+}
